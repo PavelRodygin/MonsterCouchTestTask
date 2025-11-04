@@ -1,6 +1,7 @@
 using CodeBase.Services.SceneInstallerService;
 using Modules.Base.GameModule.Scripts.Gameplay.Systems;
 using Modules.Base.Game.Scripts.Gameplay.Player.Factory;
+using Modules.Base.Game.Scripts.Gameplay.Enemy;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -11,6 +12,7 @@ namespace Modules.Base.Game.Scripts
     {
         [SerializeField] private GameView gameView;
         [SerializeField] private GameManager gameManager;
+        [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private GameObject playerPrefab;
 
         public override void RegisterSceneDependencies(IContainerBuilder builder)
@@ -24,6 +26,9 @@ namespace Modules.Base.Game.Scripts
             builder.RegisterComponent(gameView).As<GameView>();
             
             builder.RegisterComponent(gameManager);
+            
+            // Register EnemyManager component from scene
+            builder.RegisterComponent(enemyManager);
             
             // Camera is already registered in BaseModuleSceneInstaller
             

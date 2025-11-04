@@ -18,11 +18,9 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         [Header("2D Player Settings")]
         [SerializeField] private Vector3 playerStartPosition = Vector3.zero;
         
-        [Header("Enemy Settings")]
-        [SerializeField] private EnemyManager enemyManager;
-        
         private InputSystemService _inputSystemService;
         private IPlayerFactory _playerFactory;
+        private EnemyManager _enemyManager;
         private GameObject _activePlayer;
         
         public Transform GameWorldTransform => gameWorldTransform;
@@ -32,10 +30,11 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         public event Action OnReturnToMenu;
         
         [Inject]
-        private void Construct(InputSystemService inputSystemService, IPlayerFactory playerFactory)
+        private void Construct(InputSystemService inputSystemService, IPlayerFactory playerFactory, EnemyManager enemyManager)
         {
             _inputSystemService = inputSystemService;
             _playerFactory = playerFactory;
+            _enemyManager = enemyManager;
         }
         
         private void Update()
@@ -54,9 +53,9 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
             InitializeGameInput();
             SpawnPlayer2D();
             
-            if (enemyManager != null && _activePlayer != null)
+            if (_enemyManager != null && _activePlayer != null)
             {
-                enemyManager.Initialize(_activePlayer.transform);
+                _enemyManager.Initialize(_activePlayer.transform);
             }
             
             Debug.Log("2D Game started successfully!");
@@ -66,9 +65,9 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         {
             DestroyPlayer();
             
-            if (enemyManager != null)
+            if (_enemyManager != null)
             {
-                enemyManager.ClearEnemies();
+                _enemyManager.ClearEnemies();
             }
             
             Debug.Log("Game ended!");
@@ -131,9 +130,9 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
                 return false;
             }
 
-            if (enemyManager == null)
+            if (_enemyManager == null)
             {
-                Debug.LogError("EnemyManager is not assigned in GameManager!");
+                Debug.LogError("EnemyManager is not injected in GameManager!");
                 return false;
             }
 
