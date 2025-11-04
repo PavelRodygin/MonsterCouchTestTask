@@ -44,6 +44,8 @@ namespace Modules.Base.MainMenu.Scripts.SettingsState
 
         public void SetupEventListeners(SettingsCommands commands)
         {
+            _inputSystemService.SwitchToUI();
+            
             backButton.OnClickAsObservable()
                 .Where(_ => IsActive)
                 .Subscribe(_ => commands.BackCommand.Execute(default))
@@ -53,10 +55,20 @@ namespace Modules.Base.MainMenu.Scripts.SettingsState
                 .Where(_ => IsActive)
                 .Subscribe(_ => commands.SoundToggleCommand.Execute(musicToggle.isOn))
                 .AddTo(this);
+
+            // Keyboard navigation support - Escape key to go back
+            var backPerformedObservable = 
+                _inputSystemService.GetPerformedObservable(_inputSystemService.InputActions.UI.Cancel);
+
+            backPerformedObservable
+                .Where(_ => IsActive)
+                .Subscribe(_ => commands.BackCommand.Execute(default))
+                .AddTo(this);
         }
 
         public override async UniTask Show()
         {
+            _inputSystemService.SwitchToUI();
             _inputSystemService.SetFirstSelectedObject(backButton);
             await base.Show();
         }

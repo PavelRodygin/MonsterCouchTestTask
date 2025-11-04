@@ -1,19 +1,19 @@
 {
-    "name": "MainMenu",
+    "name": "GameModule",
     "rootNamespace": "",
     "references": [
-        "UniTask",
-        "VContainer",
-        "R3.Unity",
-        "Core",
+        "Unity.InputSystem",
         "Unity.TextMeshPro",
-        "DOTween.Modules",
+        "VContainer",
+        "UniTask",
+        "R3.Unity",
         "UniTask.DOTween",
+        "DOTween.Modules",
+        "Core",
         "Systems",
         "Services",
         "UnityEditor.UI",
-        "UnityEngine.UI",
-        "Unity.InputSystem"
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

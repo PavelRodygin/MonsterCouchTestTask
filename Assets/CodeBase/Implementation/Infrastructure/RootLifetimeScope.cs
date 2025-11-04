@@ -30,25 +30,8 @@ namespace CodeBase.Implementation.Infrastructure
             builder.Register<ModuleStateMachine>(Lifetime.Singleton)
                 .AsImplementedInterfaces()
                 .AsSelf();
-            
-            RegisterConfiguration(builder);
         }
-
-        private static void RegisterConfiguration(IContainerBuilder builder)
-        {
-            // Load configuration from Resources folder (works in both editor and builds)
-            var configTextAsset = Resources.Load<TextAsset>("appsettings");
-            if (configTextAsset == null)
-            {
-                throw new System.IO.FileNotFoundException("appsettings.json not found in Resources folder");
-            }
-
-            IConfiguration configuration = new ConfigurationBuilder()
-                .AddJsonStream(new System.IO.MemoryStream(System.Text.Encoding.UTF8.GetBytes(configTextAsset.text)))
-                .Build();
-            builder.RegisterInstance(configuration);
-        }
-
+        
         private void RegisterSystems(IContainerBuilder builder)
         {
             builder.Register<SaveSystem>(Lifetime.Singleton)

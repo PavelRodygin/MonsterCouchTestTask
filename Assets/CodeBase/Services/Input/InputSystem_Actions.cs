@@ -1012,27 +1012,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Next"",
-                    ""type"": ""Button"",
-                    ""id"": ""b7230bb6-fc9b-4f52-8b25-f5e19cb2c2ba"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""641cd816-40e6-41b4-8c3d-04687c349290"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""EnterVehicle"",
-                    ""type"": ""Button"",
-                    ""id"": ""cb875144-8ada-4531-924b-9f92767cbc3e"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1158,28 +1140,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Joystick"",
                     ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cbac6039-9c09-46a1-b5f2-4e5124ccb5ed"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Next"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e15ca19d-e649-4852-97d5-7fe8ccc44e94"",
-                    ""path"": ""<Gamepad>/dpad/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Next"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1336,284 +1296,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""69556534-be22-4940-926a-f53d0cfbb36a"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""EnterVehicle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2290f522-7430-4f9e-a619-866aa511432f"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""EnterVehicle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""056b0406-aac2-4c4b-bfc9-184aab7208da"",
-                    ""path"": ""<XInputController>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""EnterVehicle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1aba3a0a-8db8-47b8-be8d-ff857bac8d4c"",
-                    ""path"": ""<DualShockGamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""EnterVehicle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Crane"",
-            ""id"": ""31747aa7-fc2e-429e-b053-3f790d9855af"",
-            ""actions"": [
-                {
-                    ""name"": ""CameraLook"",
-                    ""type"": ""Value"",
-                    ""id"": ""43109fd0-b42a-48d7-b6e4-c013cef4835f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""TrolleyForward"",
-                    ""type"": ""Button"",
-                    ""id"": ""735dc4f5-f2ea-4949-8957-8122697a50d8"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TrolleyBackward"",
-                    ""type"": ""Button"",
-                    ""id"": ""aacbfeb1-db5c-4563-b651-461eaa75b8d7"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""HookDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""6da10765-e99e-42de-8a66-c5083d4635dd"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""HookUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""7b3da04c-3065-488e-b7b8-0887b6caeab2"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""AttachCargo"",
-                    ""type"": ""Button"",
-                    ""id"": ""bd260e26-9c52-4f87-85ad-0cb00003d93b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""TurntableRotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""6a8bdf24-74e9-4233-b440-3b63694534bb"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""TrolleyMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""82ddac43-9e15-464f-a991-32336c62f22f"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""f941fbf9-70c4-4bfc-82fa-3e5b0f9acccf"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertX=false),ScaleVector2(x=0.1,y=0.1)"",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""CameraLook"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""113db36a-0ef6-4873-8de3-b88603405860"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertX=false),ScaleVector2(x=300,y=300),StickDeadzone"",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""CameraLook"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eb8c7353-8da0-48c1-a5b0-e9a5db2293f0"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""CameraLook"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""163a5634-b095-4ba3-9569-e6a23dc8e57a"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""TrolleyForward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3d358538-0529-4a61-88b8-9dc836b01be9"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""TrolleyBackward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""78a24675-a113-4e98-846e-11d2118ae1fd"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""HookDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""06f8d38b-0633-459a-a5a4-2f69e6384496"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""HookUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""48e8b3d2-c8d9-4581-a47d-6fed440c0e16"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""AttachCargo"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""e013cd5a-71fe-44df-9544-67102210f7cc"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TurntableRotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""f45c8768-f29f-4c3d-8664-c82d9504defe"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""TurntableRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""4968781b-37a9-4b10-bc2e-bf4c2bfa6925"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""TurntableRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""7da17f2f-89c7-4786-a725-8f3a4593845d"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TrolleyMove"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""de65654e-6cf5-4026-b3c2-d5fff9923ffb"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""TrolleyMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""db77d525-bccb-4bc2-8039-e3cfedf0a53b"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""TrolleyMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1708,26 +1390,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_PlayerHumanoid_Interact = m_PlayerHumanoid.FindAction("Interact", throwIfNotFound: true);
         m_PlayerHumanoid_Crouch = m_PlayerHumanoid.FindAction("Crouch", throwIfNotFound: true);
         m_PlayerHumanoid_Jump = m_PlayerHumanoid.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerHumanoid_Next = m_PlayerHumanoid.FindAction("Next", throwIfNotFound: true);
         m_PlayerHumanoid_Sprint = m_PlayerHumanoid.FindAction("Sprint", throwIfNotFound: true);
-        m_PlayerHumanoid_EnterVehicle = m_PlayerHumanoid.FindAction("EnterVehicle", throwIfNotFound: true);
-        // Crane
-        m_Crane = asset.FindActionMap("Crane", throwIfNotFound: true);
-        m_Crane_CameraLook = m_Crane.FindAction("CameraLook", throwIfNotFound: true);
-        m_Crane_TrolleyForward = m_Crane.FindAction("TrolleyForward", throwIfNotFound: true);
-        m_Crane_TrolleyBackward = m_Crane.FindAction("TrolleyBackward", throwIfNotFound: true);
-        m_Crane_HookDown = m_Crane.FindAction("HookDown", throwIfNotFound: true);
-        m_Crane_HookUp = m_Crane.FindAction("HookUp", throwIfNotFound: true);
-        m_Crane_AttachCargo = m_Crane.FindAction("AttachCargo", throwIfNotFound: true);
-        m_Crane_TurntableRotate = m_Crane.FindAction("TurntableRotate", throwIfNotFound: true);
-        m_Crane_TrolleyMove = m_Crane.FindAction("TrolleyMove", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerHumanoid.enabled, "This will cause a leak and performance issues, InputSystem_Actions.PlayerHumanoid.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Crane.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Crane.Disable() has not been called.");
     }
 
     /// <summary>
@@ -2091,9 +1760,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerHumanoid_Interact;
     private readonly InputAction m_PlayerHumanoid_Crouch;
     private readonly InputAction m_PlayerHumanoid_Jump;
-    private readonly InputAction m_PlayerHumanoid_Next;
     private readonly InputAction m_PlayerHumanoid_Sprint;
-    private readonly InputAction m_PlayerHumanoid_EnterVehicle;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerHumanoid".
     /// </summary>
@@ -2126,17 +1793,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Jump => m_Wrapper.m_PlayerHumanoid_Jump;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerHumanoid/Next".
-        /// </summary>
-        public InputAction @Next => m_Wrapper.m_PlayerHumanoid_Next;
-        /// <summary>
         /// Provides access to the underlying input action "PlayerHumanoid/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_PlayerHumanoid_Sprint;
-        /// <summary>
-        /// Provides access to the underlying input action "PlayerHumanoid/EnterVehicle".
-        /// </summary>
-        public InputAction @EnterVehicle => m_Wrapper.m_PlayerHumanoid_EnterVehicle;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -2178,15 +1837,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Next.started += instance.OnNext;
-            @Next.performed += instance.OnNext;
-            @Next.canceled += instance.OnNext;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
-            @EnterVehicle.started += instance.OnEnterVehicle;
-            @EnterVehicle.performed += instance.OnEnterVehicle;
-            @EnterVehicle.canceled += instance.OnEnterVehicle;
         }
 
         /// <summary>
@@ -2213,15 +1866,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Next.started -= instance.OnNext;
-            @Next.performed -= instance.OnNext;
-            @Next.canceled -= instance.OnNext;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
-            @EnterVehicle.started -= instance.OnEnterVehicle;
-            @EnterVehicle.performed -= instance.OnEnterVehicle;
-            @EnterVehicle.canceled -= instance.OnEnterVehicle;
         }
 
         /// <summary>
@@ -2255,179 +1902,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerHumanoidActions" /> instance referencing this action map.
     /// </summary>
     public PlayerHumanoidActions @PlayerHumanoid => new PlayerHumanoidActions(this);
-
-    // Crane
-    private readonly InputActionMap m_Crane;
-    private List<ICraneActions> m_CraneActionsCallbackInterfaces = new List<ICraneActions>();
-    private readonly InputAction m_Crane_CameraLook;
-    private readonly InputAction m_Crane_TrolleyForward;
-    private readonly InputAction m_Crane_TrolleyBackward;
-    private readonly InputAction m_Crane_HookDown;
-    private readonly InputAction m_Crane_HookUp;
-    private readonly InputAction m_Crane_AttachCargo;
-    private readonly InputAction m_Crane_TurntableRotate;
-    private readonly InputAction m_Crane_TrolleyMove;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "Crane".
-    /// </summary>
-    public struct CraneActions
-    {
-        private @InputSystem_Actions m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public CraneActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/CameraLook".
-        /// </summary>
-        public InputAction @CameraLook => m_Wrapper.m_Crane_CameraLook;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/TrolleyForward".
-        /// </summary>
-        public InputAction @TrolleyForward => m_Wrapper.m_Crane_TrolleyForward;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/TrolleyBackward".
-        /// </summary>
-        public InputAction @TrolleyBackward => m_Wrapper.m_Crane_TrolleyBackward;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/HookDown".
-        /// </summary>
-        public InputAction @HookDown => m_Wrapper.m_Crane_HookDown;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/HookUp".
-        /// </summary>
-        public InputAction @HookUp => m_Wrapper.m_Crane_HookUp;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/AttachCargo".
-        /// </summary>
-        public InputAction @AttachCargo => m_Wrapper.m_Crane_AttachCargo;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/TurntableRotate".
-        /// </summary>
-        public InputAction @TurntableRotate => m_Wrapper.m_Crane_TurntableRotate;
-        /// <summary>
-        /// Provides access to the underlying input action "Crane/TrolleyMove".
-        /// </summary>
-        public InputAction @TrolleyMove => m_Wrapper.m_Crane_TrolleyMove;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Crane; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="CraneActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(CraneActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="CraneActions" />
-        public void AddCallbacks(ICraneActions instance)
-        {
-            if (instance == null || m_Wrapper.m_CraneActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CraneActionsCallbackInterfaces.Add(instance);
-            @CameraLook.started += instance.OnCameraLook;
-            @CameraLook.performed += instance.OnCameraLook;
-            @CameraLook.canceled += instance.OnCameraLook;
-            @TrolleyForward.started += instance.OnTrolleyForward;
-            @TrolleyForward.performed += instance.OnTrolleyForward;
-            @TrolleyForward.canceled += instance.OnTrolleyForward;
-            @TrolleyBackward.started += instance.OnTrolleyBackward;
-            @TrolleyBackward.performed += instance.OnTrolleyBackward;
-            @TrolleyBackward.canceled += instance.OnTrolleyBackward;
-            @HookDown.started += instance.OnHookDown;
-            @HookDown.performed += instance.OnHookDown;
-            @HookDown.canceled += instance.OnHookDown;
-            @HookUp.started += instance.OnHookUp;
-            @HookUp.performed += instance.OnHookUp;
-            @HookUp.canceled += instance.OnHookUp;
-            @AttachCargo.started += instance.OnAttachCargo;
-            @AttachCargo.performed += instance.OnAttachCargo;
-            @AttachCargo.canceled += instance.OnAttachCargo;
-            @TurntableRotate.started += instance.OnTurntableRotate;
-            @TurntableRotate.performed += instance.OnTurntableRotate;
-            @TurntableRotate.canceled += instance.OnTurntableRotate;
-            @TrolleyMove.started += instance.OnTrolleyMove;
-            @TrolleyMove.performed += instance.OnTrolleyMove;
-            @TrolleyMove.canceled += instance.OnTrolleyMove;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="CraneActions" />
-        private void UnregisterCallbacks(ICraneActions instance)
-        {
-            @CameraLook.started -= instance.OnCameraLook;
-            @CameraLook.performed -= instance.OnCameraLook;
-            @CameraLook.canceled -= instance.OnCameraLook;
-            @TrolleyForward.started -= instance.OnTrolleyForward;
-            @TrolleyForward.performed -= instance.OnTrolleyForward;
-            @TrolleyForward.canceled -= instance.OnTrolleyForward;
-            @TrolleyBackward.started -= instance.OnTrolleyBackward;
-            @TrolleyBackward.performed -= instance.OnTrolleyBackward;
-            @TrolleyBackward.canceled -= instance.OnTrolleyBackward;
-            @HookDown.started -= instance.OnHookDown;
-            @HookDown.performed -= instance.OnHookDown;
-            @HookDown.canceled -= instance.OnHookDown;
-            @HookUp.started -= instance.OnHookUp;
-            @HookUp.performed -= instance.OnHookUp;
-            @HookUp.canceled -= instance.OnHookUp;
-            @AttachCargo.started -= instance.OnAttachCargo;
-            @AttachCargo.performed -= instance.OnAttachCargo;
-            @AttachCargo.canceled -= instance.OnAttachCargo;
-            @TurntableRotate.started -= instance.OnTurntableRotate;
-            @TurntableRotate.performed -= instance.OnTurntableRotate;
-            @TurntableRotate.canceled -= instance.OnTurntableRotate;
-            @TrolleyMove.started -= instance.OnTrolleyMove;
-            @TrolleyMove.performed -= instance.OnTrolleyMove;
-            @TrolleyMove.canceled -= instance.OnTrolleyMove;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="CraneActions.UnregisterCallbacks(ICraneActions)" />.
-        /// </summary>
-        /// <seealso cref="CraneActions.UnregisterCallbacks(ICraneActions)" />
-        public void RemoveCallbacks(ICraneActions instance)
-        {
-            if (m_Wrapper.m_CraneActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="CraneActions.AddCallbacks(ICraneActions)" />
-        /// <seealso cref="CraneActions.RemoveCallbacks(ICraneActions)" />
-        /// <seealso cref="CraneActions.UnregisterCallbacks(ICraneActions)" />
-        public void SetCallbacks(ICraneActions instance)
-        {
-            foreach (var item in m_Wrapper.m_CraneActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_CraneActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="CraneActions" /> instance referencing this action map.
-    /// </summary>
-    public CraneActions @Crane => new CraneActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2670,89 +2144,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnJump(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Next" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnNext(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Sprint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSprint(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "EnterVehicle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnEnterVehicle(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Crane" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="CraneActions.AddCallbacks(ICraneActions)" />
-    /// <seealso cref="CraneActions.RemoveCallbacks(ICraneActions)" />
-    public interface ICraneActions
-    {
-        /// <summary>
-        /// Method invoked when associated input action "CameraLook" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCameraLook(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "TrolleyForward" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTrolleyForward(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "TrolleyBackward" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTrolleyBackward(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "HookDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHookDown(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "HookUp" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHookUp(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "AttachCargo" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnAttachCargo(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "TurntableRotate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTurntableRotate(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "TrolleyMove" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnTrolleyMove(InputAction.CallbackContext context);
     }
 }

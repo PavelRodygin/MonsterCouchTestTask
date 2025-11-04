@@ -47,6 +47,8 @@ namespace Modules.Base.MainMenu.Scripts.MainMenuState
 
         public void SetupEventListeners(MainMenuCommands commands)
         {
+            _inputSystemService.SwitchToUI();
+            
             openGameButton.OnClickAsObservable()
                 .Where(_ => IsActive)
                 .Subscribe(_ => commands.OpenGameCommand.Execute(default))
@@ -60,6 +62,7 @@ namespace Modules.Base.MainMenu.Scripts.MainMenuState
 
         public override async UniTask Show()
         {
+            _inputSystemService.SwitchToUI();
             OnScreenEnabled();
             await base.Show();
         }

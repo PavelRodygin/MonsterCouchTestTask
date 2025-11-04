@@ -7,7 +7,7 @@ namespace CodeBase.Core.Infrastructure
         MainMenu,
         Converter,
         TicTac,
-        Playground3D,
+        Game,
         DeliveryTycoon
     }
 }

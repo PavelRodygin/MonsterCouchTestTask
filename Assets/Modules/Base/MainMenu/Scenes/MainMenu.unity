@@ -321,11 +321,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1269878823724244595, guid: 0aff44958797c8c4dbb53e7a77007f46, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 210.48401
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1269878823724244595, guid: 0aff44958797c8c4dbb53e7a77007f46, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 204.83734
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1269878823724244595, guid: 0aff44958797c8c4dbb53e7a77007f46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -342,6 +342,10 @@ PrefabInstance:
     - target: {fileID: 1749864789209108957, guid: 0aff44958797c8c4dbb53e7a77007f46, type: 3}
       propertyPath: m_Name
       value: SettingsStateView
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749864789209108957, guid: 0aff44958797c8c4dbb53e7a77007f46, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1834472925980919225, guid: 0aff44958797c8c4dbb53e7a77007f46, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

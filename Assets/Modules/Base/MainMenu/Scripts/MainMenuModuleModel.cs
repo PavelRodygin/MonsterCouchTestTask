@@ -34,6 +34,7 @@ namespace Modules.Base.MainMenu.Scripts
             _stateMachine.Configure(MainMenuStates.MainMenu)
                 .OnEntryAsync(async () => await onEnterMainMenu())
                 .OnExitAsync(async () => await onExitMainMenu())
+                .PermitReentry(MainMenuTriggers.BackToMainMenu) // Allow re-entering MainMenu for initialization
                 .Permit(MainMenuTriggers.OpenSettings, MainMenuStates.Settings);
 
             _stateMachine.Configure(MainMenuStates.Settings)

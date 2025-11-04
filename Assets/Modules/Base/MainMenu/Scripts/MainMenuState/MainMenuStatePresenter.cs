@@ -44,7 +44,7 @@ namespace Modules.Base.MainMenu.Scripts.MainMenuState
                 .AddTo(_disposables);
             _openGameCommand
                 .ThrottleFirst(TimeSpan.FromMilliseconds(_mainMenuModuleModel.CommandThrottleDelay))
-                .Subscribe(_ => OnPlayground3DCommand())
+                .Subscribe(_ => OnGameCommand())
                 .AddTo(_disposables);
             _openSettingsCommand
                 .ThrottleFirst(TimeSpan.FromMilliseconds(_mainMenuModuleModel.CommandThrottleDelay))
@@ -86,7 +86,7 @@ namespace Modules.Base.MainMenu.Scripts.MainMenuState
 
         private void OnConverterCommand() => _openNewModuleCommand.Execute(ModulesMap.Converter);
         private void OnTicTacCommand() => _openNewModuleCommand.Execute(ModulesMap.TicTac);
-        private void OnPlayground3DCommand() => _openNewModuleCommand.Execute(ModulesMap.Playground3D);
+        private void OnGameCommand() => _openNewModuleCommand.Execute(ModulesMap.Game);
         private async void OnOpenSettingsCommand() => await _mainMenuModuleModel.ChangeState(MainMenuTriggers.OpenSettings);
     }
 }

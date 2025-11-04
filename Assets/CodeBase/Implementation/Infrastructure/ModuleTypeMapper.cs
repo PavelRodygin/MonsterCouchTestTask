@@ -5,7 +5,7 @@ using CodeBase.Core.Infrastructure.Modules;
 using CodeBase.Core.Patterns.Architecture.MVP;
 using Modules.Base.Bootstrap.Scripts;
 using Modules.Base.MainMenu.Scripts;
-using Modules.Base.Playground3D.Scripts;
+using Modules.Base.Game.Scripts;
 using Modules.Base.TicTac.Scripts;
 using VContainer;
 
@@ -26,7 +26,7 @@ namespace CodeBase.Implementation.Infrastructure
                 { ModulesMap.Bootstrap, typeof(BootstrapModuleController) },
                 { ModulesMap.MainMenu, typeof(MainMenuModuleController) },
                 { ModulesMap.TicTac, typeof(TicTacModuleController) },
-                { ModulesMap.Playground3D, typeof(Playground3DModuleController) },
+                { ModulesMap.Game, typeof(GameModuleController) },
             };
         }
 
