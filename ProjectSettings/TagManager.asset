@@ -47,18 +47,6 @@ TagManager:
   - name: Background
     uniqueID: 1719635575
     locked: 0
-  - name: Platforms
-    uniqueID: 2069315633
-    locked: 0
-  - name: Items
-    uniqueID: 3431464513
-    locked: 0
-  - name: Ball
-    uniqueID: 1531654237
-    locked: 0
-  - name: Stars
-    uniqueID: 3186722493
-    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

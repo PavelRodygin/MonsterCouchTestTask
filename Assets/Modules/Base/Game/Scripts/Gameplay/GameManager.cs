@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Services.Input;
 using Modules.Base.Game.Scripts.Gameplay.Player;
 using Modules.Base.Game.Scripts.Gameplay.Player.Factory;
+using Modules.Base.Game.Scripts.Gameplay.Enemy;
 using UnityEngine;
 using VContainer;
 
@@ -13,18 +15,21 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         [Header("Game World Settings")]
         [SerializeField] private Transform gameWorldTransform;
         
-        [Header("Player Spawn Settings")]
-        [SerializeField] private Transform[] playerSpawnPoints;
-        [SerializeField] private bool spawnPlayerOnStart = true;
+        [Header("2D Player Settings")]
+        [SerializeField] private Vector3 playerStartPosition = Vector3.zero;
+        
+        [Header("Enemy Settings")]
+        [SerializeField] private EnemyManager enemyManager;
         
         private InputSystemService _inputSystemService;
         private IPlayerFactory _playerFactory;
-        private readonly List<GameObject> _activePlayers = new();
-        private int _nextSpawnIndex = 0;
-
+        private GameObject _activePlayer;
+        
         public Transform GameWorldTransform => gameWorldTransform;
-        public IReadOnlyList<GameObject> ActivePlayers => _activePlayers;
-        public bool HasActivePlayers => _activePlayers.Count > 0;
+        public GameObject ActivePlayer => _activePlayer;
+        public bool HasActivePlayer => _activePlayer != null;
+        
+        public event Action OnReturnToMenu;
         
         [Inject]
         private void Construct(InputSystemService inputSystemService, IPlayerFactory playerFactory)
@@ -33,120 +38,106 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
             _playerFactory = playerFactory;
         }
         
+        private void Update()
+        {
+            if (_inputSystemService != null && _inputSystemService.InputActions.UI.Cancel.triggered)
+            {
+                ReturnToMenu();
+            }
+        }
+        
         public void StartGame()
         {
             if (!ValidateConfiguration())
                 return;
 
             InitializeGameInput();
+            SpawnPlayer2D();
             
-            if (spawnPlayerOnStart)
+            if (enemyManager != null && _activePlayer != null)
             {
-                SpawnPlayer();
+                enemyManager.Initialize(_activePlayer.transform);
             }
             
-            Debug.Log("Game started successfully!");
+            Debug.Log("2D Game started successfully!");
         }
 
         public void EndGame()
         {
-            DestroyAllPlayers();
+            DestroyPlayer();
+            
+            if (enemyManager != null)
+            {
+                enemyManager.ClearEnemies();
+            }
+            
             Debug.Log("Game ended!");
+        }
+        
+        private void ReturnToMenu()
+        {
+            Debug.Log("Returning to menu...");
+            OnReturnToMenu?.Invoke();
         }
 
         /// <summary>
-        /// Spawns a new player at the next available spawn point
+        /// Spawns 2D player at start position
         /// </summary>
-        /// <returns>Created player GameObject or null if failed</returns>
-        public GameObject SpawnPlayer()
+        private void SpawnPlayer2D()
         {
-            var spawnPoint = GetNextSpawnPoint();
-            if (spawnPoint == null)
+            if (_playerFactory == null)
             {
-                Debug.LogError("No spawn points available for player creation!");
-                return null;
+                Debug.LogError("PlayerFactory is not injected!");
+                return;
             }
 
-            var player = _playerFactory.Create(spawnPoint.position, spawnPoint.rotation);
-            if (player != null)
+            // Create player as child of GameWorld transform
+            Transform parentTransform = gameWorldTransform != null ? gameWorldTransform : transform;
+            _activePlayer = _playerFactory.Create(playerStartPosition, Quaternion.identity, parentTransform);
+            
+            if (_activePlayer != null)
             {
-                _activePlayers.Add(player);
+                _activePlayer.name = "Player";
                 
                 // Set up player in game world
-                var playerComponent = player.GetComponent<Player>();
+                var playerComponent = _activePlayer.GetComponent<Player>();
                 if (playerComponent != null)
                 {
                     playerComponent.SetGameWorldTransform(gameWorldTransform);
                 }
                 
-                player.name = $"Player_{_activePlayers.Count}";
-                Debug.Log($"Player spawned successfully at spawn point {_nextSpawnIndex - 1}");
-            }
-
-            return player;
-        }
-
-        /// <summary>
-        /// Removes specific player from the game
-        /// </summary>
-        /// <param name="player">Player to remove</param>
-        public void RemovePlayer(GameObject player)
-        {
-            if (_activePlayers.Remove(player))
-            {
-                if (player != null)
-                {
-                    Destroy(player);
-                }
-                Debug.Log("Player removed from game");
+                Debug.Log($"2D Player spawned successfully in parent: {parentTransform.name}");
             }
         }
 
         /// <summary>
-        /// Destroys all active players
+        /// Destroys the active player
         /// </summary>
-        public void DestroyAllPlayers()
+        private void DestroyPlayer()
         {
-            foreach (var player in _activePlayers.Where(p => p != null))
+            if (_activePlayer != null)
             {
-                Destroy(player);
+                Destroy(_activePlayer);
+                _activePlayer = null;
+                Debug.Log("Player destroyed");
             }
-            _activePlayers.Clear();
-            _nextSpawnIndex = 0;
-            Debug.Log("All players destroyed");
         }
 
         private bool ValidateConfiguration()
         {
-            if (gameWorldTransform == null)
-            {
-                Debug.LogError("GameWorldTransform is not set in GameManager!");
-                return false;
-            }
-
-            if (playerSpawnPoints == null || playerSpawnPoints.Length == 0)
-            {
-                Debug.LogError("No player spawn points configured in GameManager!");
-                return false;
-            }
-
             if (_playerFactory == null)
             {
                 Debug.LogError("PlayerFactory is not injected in GameManager!");
                 return false;
             }
 
+            if (enemyManager == null)
+            {
+                Debug.LogError("EnemyManager is not assigned in GameManager!");
+                return false;
+            }
+
             return true;
-        }
-
-        private Transform GetNextSpawnPoint()
-        {
-            if (playerSpawnPoints == null || playerSpawnPoints.Length == 0)
-                return null;
-
-            var spawnPoint = playerSpawnPoints[_nextSpawnIndex % playerSpawnPoints.Length];
-            _nextSpawnIndex++;
-            return spawnPoint;
         }
 
         private void InitializeGameInput()
@@ -156,25 +147,15 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
 
         private void OnDestroy()
         {
-            DestroyAllPlayers();
+            DestroyPlayer();
         }
 
         #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            // Draw spawn points in editor
-            if (playerSpawnPoints != null)
-            {
-                Gizmos.color = Color.green;
-                for (int i = 0; i < playerSpawnPoints.Length; i++)
-                {
-                    if (playerSpawnPoints[i] != null)
-                    {
-                        Gizmos.DrawWireSphere(playerSpawnPoints[i].position, 0.5f);
-                        UnityEditor.Handles.Label(playerSpawnPoints[i].position + Vector3.up, $"Spawn {i}");
-                    }
-                }
-            }
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(playerStartPosition, 0.3f);
+            UnityEditor.Handles.Label(playerStartPosition + Vector3.up * 0.5f, "Player Start");
         }
         #endif
     }

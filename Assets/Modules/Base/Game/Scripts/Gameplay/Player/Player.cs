@@ -4,35 +4,26 @@ using VContainer;
 
 namespace Modules.Base.Game.Scripts.Gameplay.Player
 {
-    [RequireComponent(typeof(PlayerInteractionController))]
     [RequireComponent(typeof(PlayerMoveController))]
-    [RequireComponent(typeof(PlayerGfx))]
-    [RequireComponent(typeof(PlayerSfx))]
     public class Player : MonoBehaviour
     {
-        [SerializeField] private Transform playerCameraTransform;
-        [SerializeField] private CharacterController characterController;
-
         private InputSystemService _inputSystemService;
+        private Camera _mainCamera;
         private Transform _gameWorldTransform;
-        private Vector3 _originalPosition;
         
         public bool IsInVehicle { get; private set; }
 
         // Public properties for component access
         [Header("Controllers")]
         [field: SerializeField] public PlayerMoveController MoveController { get; private set; }
-        [field: SerializeField] public PlayerInteractionController InteractionController { get; private set; }
         [field: SerializeField] public PlayerGfx GfxManager { get; private set; }
         [field: SerializeField] public PlayerSfx SfxManager { get; private set; }
 
         [Inject]
-        private void Construct(InputSystemService inputSystemService)
+        private void Construct(InputSystemService inputSystemService, Camera mainCamera)
         {
             _inputSystemService = inputSystemService;
-            
-            // playerInteractionController.OnEnterVehicle += EnterVehicle;
-            // playerInteractionController.OnExitVehicle += ExitVehicle;
+            _mainCamera = mainCamera;
         }
 
         // Method to set GameWorldTransform from external source (e.g., GameManager)
@@ -43,17 +34,13 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player
 
         public void Initialize(bool isPlayerInVehicle)
         {
-            // playerInteractionController.Initialize(playerCameraTransform.transform, isPlayerInVehicle);
-            MoveController.Initialize(playerCameraTransform, isPlayerInVehicle);
+            MoveController.Initialize(_mainCamera);
         }
 
         private void Awake()
         {
             if (!MoveController)
                 MoveController = GetComponent<PlayerMoveController>();
-
-            if (!InteractionController)
-                InteractionController = GetComponent<PlayerInteractionController>();
 
             if (!GfxManager)
                 GfxManager = GetComponent<PlayerGfx>();
@@ -91,8 +78,7 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player
 
         private void OnDestroy()
         {
-            // playerInteractionController.OnEnterVehicle -= EnterVehicle;
-            // playerInteractionController.OnExitVehicle -= ExitVehicle;
+            // Cleanup if needed
         }
     }
 }

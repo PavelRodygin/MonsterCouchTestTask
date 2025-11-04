@@ -15,5 +15,14 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player.Factory
         /// <param name="rotation">Spawn rotation</param>
         /// <returns>Player GameObject with injected dependencies</returns>
         GameObject Create(Vector3 position, Quaternion rotation);
+
+        /// <summary>
+        /// Creates a new player instance at specified position and rotation with parent transform
+        /// </summary>
+        /// <param name="position">Spawn position</param>
+        /// <param name="rotation">Spawn rotation</param>
+        /// <param name="parent">Parent transform (optional)</param>
+        /// <returns>Player GameObject with injected dependencies</returns>
+        GameObject Create(Vector3 position, Quaternion rotation, Transform parent);
     }
 }

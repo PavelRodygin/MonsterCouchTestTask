@@ -3,104 +3,53 @@ using VContainer;
 
 namespace Modules.Base.Game.Scripts.Gameplay.Player
 {
-    [RequireComponent(typeof(Animator))]
+    /// <summary>
+    /// Manages player graphics and visual effects for 2D gameplay
+    /// Simplified version for 2D sprite-based player (no complex animations needed)
+    /// </summary>
     public class PlayerGfx : MonoBehaviour
     {
-        private Animator _animator;
-        private CharacterController _characterController;
         private PlayerMoveController _moveController;
-        private PlayerSfx _playerSfx;
         private Player _player;
-        private bool _animationsEnabled = true;
+        private SpriteRenderer _spriteRenderer;
         
-        private int _animIDSpeed;
-        private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
-
-        // PlayerMoveController is a component dependency - get it via GetComponent instead of DI
-        // [Inject] - Removed: using GetComponent instead for internal player component dependencies
+        [Header("Visual Settings")]
+        [SerializeField] private bool enableVisualEffects = false;
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _characterController = GetComponent<CharacterController>();
-            
             _moveController = GetComponent<PlayerMoveController>();
+            _player = GetComponent<Player>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             
             if (!_moveController) 
-                Debug.LogError("PlayerMoveController not found on the same GameObject!");
-            
-            _playerSfx = GetComponent<PlayerSfx>();
-            if (!_playerSfx) 
-                Debug.LogError("PlayerSfx not found on the same GameObject!");
-            
-            _player = GetComponent<Player>();
+                Debug.LogWarning("PlayerMoveController not found on the same GameObject!");
             
             if (!_player) 
-                Debug.LogError("Player not found on the same GameObject!");
-
-            AssignAnimationIDs();
+                Debug.LogWarning("Player not found on the same GameObject!");
         }
 
         private void Update()
         {
-            if (_animationsEnabled) UpdateAnimations();
-        }
-        
-        public void OnTowTruckEntered()
-        {
-            if (!_animationsEnabled) return;
-
-            _animationsEnabled = false;
-            _animator.enabled = false;
+            if (enableVisualEffects)
+            {
+                UpdateVisualEffects();
+            }
         }
 
-        public void OnTowTruckExited()
+        /// <summary>
+        /// Updates visual effects based on player state
+        /// Can be extended for sprite animations, particles, etc.
+        /// </summary>
+        private void UpdateVisualEffects()
         {
-            if (_animationsEnabled) return;
+            if (!_moveController || !_spriteRenderer) return;
 
-            _animationsEnabled = true;
-            _animator.enabled = true;
-        }
-
-        private void AssignAnimationIDs()
-        {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
-        }
-
-        private void UpdateAnimations()
-        {
-            if (!_animator || !_player || !_moveController) return;
+            // Example: Could add sprite flipping based on movement direction
+            // Example: Could add color tinting based on speed
+            // Example: Could add particle effects
             
-            // Use direct move controller data
-            _animator.SetFloat(_animIDSpeed, _moveController.CurrentSpeed);
-            _animator.SetFloat(_animIDMotionSpeed, _moveController.InputMagnitude);
-            _animator.SetBool(_animIDGrounded, _moveController.IsGrounded);
-            _animator.SetBool(_animIDJump, _moveController.IsJumping);
-            _animator.SetBool(_animIDFreeFall, _moveController.IsFalling);
-        }
-
-
-        private void OnFootstep(AnimationEvent animationEvent)
-        {
-            if (_playerSfx)
-                _playerSfx.OnFootstep(animationEvent);
-        }
-
-        private void OnLand(AnimationEvent animationEvent)
-        {
-            if (_playerSfx)
-                _playerSfx.OnLand(animationEvent);
-            
-            // Handle animation state
-            if (animationEvent.animatorClipInfo.weight > 0.5f) 
-                _animator.SetBool(_animIDJump, false);
+            // For now, this is a placeholder for future visual enhancements
         }
     }
 }

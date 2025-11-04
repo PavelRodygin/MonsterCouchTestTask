@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using CodeBase.Core.Infrastructure;
 using CodeBase.Core.Infrastructure.Modules;
 using CodeBase.Core.Patterns.Architecture.MVP;
-using Modules.Base.Bootstrap.Scripts;
 using Modules.Base.MainMenu.Scripts;
 using Modules.Base.Game.Scripts;
-using Modules.Base.TicTac.Scripts;
 using VContainer;
 
 namespace CodeBase.Implementation.Infrastructure
@@ -23,9 +21,7 @@ namespace CodeBase.Implementation.Infrastructure
         {
             _map = new Dictionary<ModulesMap, Type> 
             {
-                { ModulesMap.Bootstrap, typeof(BootstrapModuleController) },
                 { ModulesMap.MainMenu, typeof(MainMenuModuleController) },
-                { ModulesMap.TicTac, typeof(TicTacModuleController) },
                 { ModulesMap.Game, typeof(GameModuleController) },
             };
         }

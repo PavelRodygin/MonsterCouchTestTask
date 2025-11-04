@@ -27,11 +27,6 @@ namespace Modules.Base.Game.Scripts
     {
         [Header("Navigation")]
         [SerializeField] private Button mainMenuButton;
-        [SerializeField] private Button settingsButton;
-        
-        [Header("Sound")]
-        [SerializeField] private Toggle soundToggle;
-
         private GameCommands _commands;
 
         public void SetupEventListeners(GameCommands commands)
@@ -43,28 +38,6 @@ namespace Modules.Base.Game.Scripts
                 mainMenuButton.OnClickAsObservable()
                     .Subscribe(_ => _commands.OpenMainMenuCommand.Execute(Unit.Default))
                     .AddTo(this);
-            }
-            
-            if (settingsButton != null)
-            {
-                settingsButton.OnClickAsObservable()
-                    .Subscribe(_ => _commands.SettingsPopupCommand.Execute(Unit.Default))
-                    .AddTo(this);
-            }
-            
-            if (soundToggle != null)
-            {
-                soundToggle.OnValueChangedAsObservable()
-                    .Subscribe(isOn => _commands.ToggleSoundCommand.Execute(isOn))
-                    .AddTo(this);
-            }
-        }
-
-        public void InitializeSoundToggle(bool isMusicOn)
-        {
-            if (soundToggle != null)
-            {
-                soundToggle.isOn = isMusicOn;
             }
         }
     }

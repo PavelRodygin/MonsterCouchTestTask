@@ -38,6 +38,7 @@ namespace Modules.Base.Game.Scripts
         public async UniTask Enter(object param)
         {
             SubscribeToModuleUpdates();
+            SubscribeToGameEvents();
 
             _gamePresenter.HideInstantly();
             
@@ -59,6 +60,7 @@ namespace Modules.Base.Game.Scripts
 
         public void Dispose()
         {
+            UnsubscribeFromGameEvents();
             _disposables.Dispose();
             
             _gamePresenter.Dispose();
@@ -73,6 +75,29 @@ namespace Modules.Base.Game.Scripts
                 .ThrottleFirst(TimeSpan.FromMilliseconds(_gameModuleModel.ModuleTransitionThrottleDelay))
                 .Subscribe(RunNewModule)
                 .AddTo(_disposables);
+        }
+
+        private void SubscribeToGameEvents()
+        {
+            if (_gameManager != null)
+            {
+                _gameManager.OnReturnToMenu += HandleReturnToMenu;
+            }
+        }
+
+        private void UnsubscribeFromGameEvents()
+        {
+            if (_gameManager != null)
+            {
+                _gameManager.OnReturnToMenu -= HandleReturnToMenu;
+            }
+        }
+
+        private void HandleReturnToMenu()
+        {
+            _moduleCompletionSource.TrySetResult();
+            // Navigate to Main Menu module (you'll need to define the proper module ID)
+            _screenStateMachine.RunModule(ModulesMap.MainMenu);
         }
 
 

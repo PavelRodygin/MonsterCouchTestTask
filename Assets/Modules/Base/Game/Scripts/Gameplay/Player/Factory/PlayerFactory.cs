@@ -20,10 +20,18 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player.Factory
 
         public GameObject Create(Vector3 position, Quaternion rotation)
         {
-            Debug.Log($"PlayerFactory.Create called at {position}");
+            return Create(position, rotation, null);
+        }
+
+        /// <summary>
+        /// Creates a new player instance with specified parent transform
+        /// </summary>
+        public GameObject Create(Vector3 position, Quaternion rotation, Transform parent)
+        {
+            Debug.Log($"PlayerFactory.Create called at {position}, parent: {(parent != null ? parent.name : "null")}");
             
             // Use VContainer's Instantiate method which automatically injects dependencies
-            var playerInstance = _resolver.Instantiate(_playerPrefab, position, rotation);
+            var playerInstance = _resolver.Instantiate(_playerPrefab, position, rotation, parent);
             
             // Initialize player after all dependencies are injected
             var player = playerInstance.GetComponent<Player>();

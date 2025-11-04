@@ -25,6 +25,8 @@ namespace Modules.Base.Game.Scripts
             
             builder.RegisterComponent(gameManager);
             
+            // Camera is already registered in BaseModuleSceneInstaller
+            
             // Register player factory
             builder
                 .Register<PlayerFactory>(Lifetime.Singleton)
