@@ -16,7 +16,7 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         [SerializeField] private Transform gameWorldTransform;
         
         [Header("2D Player Settings")]
-        [SerializeField] private Vector3 playerStartPosition = Vector3.zero;
+        [SerializeField] private Vector3 playerStartPosition = new Vector3(0, 0, 0);
         
         private InputSystemService _inputSystemService;
         private IPlayerFactory _playerFactory;
@@ -55,7 +55,9 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
             
             if (_enemyManager != null && _activePlayer != null)
             {
-                _enemyManager.Initialize(_activePlayer.transform);
+                // Spawn enemies in the same parent as player
+                Transform spawnParent = gameWorldTransform != null ? gameWorldTransform : transform;
+                _enemyManager.Initialize(_activePlayer.transform, spawnParent);
             }
             
             Debug.Log("2D Game started successfully!");

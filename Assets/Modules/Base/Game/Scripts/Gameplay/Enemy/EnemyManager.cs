@@ -18,6 +18,7 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         
         private readonly List<Enemy> _activeEnemies = new();
         private Transform _playerTransform;
+        private Transform _spawnParent;
         private Camera _mainCamera;
         private Vector2 _screenBounds;
 
@@ -29,9 +30,21 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
             CalculateScreenBounds();
         }
 
-        public void Initialize(Transform playerTransform)
+        public void Initialize(Transform playerTransform, Transform spawnParent)
         {
             _playerTransform = playerTransform;
+            _spawnParent = spawnParent;
+            
+            // Ensure camera and bounds are initialized before spawning
+            if (_mainCamera == null)
+            {
+                _mainCamera = Camera.main;
+            }
+            
+            CalculateScreenBounds();
+            
+            Debug.Log($"EnemyManager initialized with screen bounds: {_screenBounds}, player at: {_playerTransform.position}, spawn parent: {(_spawnParent != null ? _spawnParent.name : "null")}");
+            
             SpawnEnemies();
         }
 
@@ -43,12 +56,22 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
                 return;
             }
 
+            if (_playerTransform == null)
+            {
+                Debug.LogError("Player transform is null! Cannot spawn enemies.");
+                return;
+            }
+
             Vector3 center = spawnCenter != null ? spawnCenter.position : Vector3.zero;
 
             for (int i = 0; i < enemyCount; i++)
             {
-                Vector2 randomPosition = GetRandomPositionInScreen();
-                GameObject enemyObj = Instantiate(enemyPrefab, randomPosition, Quaternion.identity, transform);
+                Vector2 randomPosition2D = GetRandomPositionInScreen();
+                // Set Z to 0.1 to be slightly in front of background but behind UI
+                Vector3 spawnPosition = new Vector3(randomPosition2D.x, randomPosition2D.y, 0.1f);
+                
+                // Spawn enemies in the same parent as player (GameWorld)
+                GameObject enemyObj = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, _spawnParent);
                 enemyObj.name = $"Enemy_{i}";
 
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
@@ -59,7 +82,7 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
                 }
             }
 
-            Debug.Log($"Spawned {_activeEnemies.Count} enemies");
+            Debug.Log($"Spawned {_activeEnemies.Count} enemies at Z=0.1 in parent: {(_spawnParent != null ? _spawnParent.name : "null")}");
         }
 
         private Vector2 GetRandomPositionInScreen()

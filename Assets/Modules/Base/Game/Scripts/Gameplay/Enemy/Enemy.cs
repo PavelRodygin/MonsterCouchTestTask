@@ -17,25 +17,39 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         private Camera _mainCamera;
         private Vector2 _screenBounds;
         private bool _isStopped = false;
+        private bool _isInitialized = false;
         private SpriteRenderer _spriteRenderer;
 
         public bool IsStopped => _isStopped;
 
-        private void Start()
+        private void Awake()
         {
             _mainCamera = Camera.main;
             _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        private void Start()
+        {
             CalculateScreenBounds();
+            _isInitialized = true;
         }
 
         public void Initialize(Transform playerTransform)
         {
             _playerTransform = playerTransform;
+            
+            // Initialize bounds immediately if camera is available
+            if (_mainCamera != null && _screenBounds == Vector2.zero)
+            {
+                CalculateScreenBounds();
+            }
         }
 
         private void Update()
         {
-            if (_isStopped || _playerTransform == null) return;
+            // Don't move until fully initialized
+            if (!_isInitialized || _isStopped || _playerTransform == null || _screenBounds == Vector2.zero) 
+                return;
 
             FleeFromPlayer();
         }
@@ -44,6 +58,14 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         {
             // Always flee from player, no distance check needed
             Vector2 fleeDirection = ((Vector2)transform.position - (Vector2)_playerTransform.position).normalized;
+            
+            // Check if direction is valid (not at exact same position)
+            if (fleeDirection == Vector2.zero)
+            {
+                // If at same position, flee in random direction
+                fleeDirection = Random.insideUnitCircle.normalized;
+            }
+            
             Vector3 movement = fleeDirection * fleeSpeed * Time.deltaTime;
             Vector3 newPosition = transform.position + movement;
 

@@ -58,10 +58,14 @@ namespace Modules.Base.Game.Scripts.Editor
         {
             GameObject player = new GameObject("Player2D");
             
+            // Set position with Z=0 (player on same plane as enemies)
+            player.transform.position = new Vector3(0, 0, 0);
+            
             // Add sprite renderer
             SpriteRenderer spriteRenderer = player.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
             spriteRenderer.color = Color.blue;
+            spriteRenderer.sortingOrder = 1; // Above enemies
             
             // Set scale
             player.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
@@ -99,10 +103,14 @@ namespace Modules.Base.Game.Scripts.Editor
         {
             GameObject enemy = new GameObject("Enemy2D");
             
+            // Set position with Z=0.1 (slightly behind player but in front of background)
+            enemy.transform.position = new Vector3(0, 0, 0.1f);
+            
             // Add sprite renderer
             SpriteRenderer spriteRenderer = enemy.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Knob.psd");
             spriteRenderer.color = Color.white;
+            spriteRenderer.sortingOrder = 0; // Below player
             
             // Set scale
             enemy.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
