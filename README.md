@@ -2,6 +2,16 @@
 
 A small 2D game built with Unity as a test assignment, featuring modular architecture with MVP pattern, dependency injection, and clean code principles.
 
+> ⚠️ **Project Status**: Work in Progress
+> 
+> The game is **not fully complete** and contains bugs. Due to time constraints, the focus was placed on:
+> - ✅ **Modular Architecture** - Clean, scalable module system
+> - ✅ **Input System** - Proper input handling and abstraction
+> - ✅ **Performance Optimization** - Boundary calculations, object management
+> - ✅ **Code Quality** - Clean code, DI, component-based design
+> 
+> The gameplay functionality is partially implemented and requires additional polish and bug fixes.
+
 ## 📋 Task Requirements
 
 ### Main Menu
@@ -33,27 +43,40 @@ A small 2D game built with Unity as a test assignment, featuring modular archite
 
 ## ✅ Implementation Status
 
-### ✨ Completed Features
+### 🏗️ Architecture & Foundation (Main Focus)
+- ✅ **Modular architecture** with complete isolation between modules
+- ✅ **MVP pattern** implementation across all modules
+- ✅ **Dependency Injection** with VContainer
+- ✅ **Input System** abstraction and proper handling
+- ✅ **Factory pattern** for entity creation with DI integration
+- ✅ **Component-based** player architecture (Move, Gfx, Sfx)
+- ✅ **Screen bounds optimization** using camera orthographic size
+- ✅ **Clean code** structure and naming conventions
+
+### ⚠️ Gameplay Features (Partially Implemented)
 
 #### Main Menu Module
-- ✅ Main menu with Play, Settings, Exit buttons
-- ✅ Full keyboard navigation support
-- ✅ Mouse navigation support
-- ✅ Clean modular architecture with MVP pattern
-
-#### Settings Module
-- ✅ Settings screen with 2 checkboxes
-- ✅ Back button and ESC key support
-- ✅ State management without persistence
+- ⚠️ Main menu UI structure created
+- ⚠️ Basic navigation (may have bugs)
+- ⚠️ Module switching implemented
 
 #### Game Module (2D Gameplay)
-- ✅ Camera with green background at (0, 0, -10)
-- ✅ Player with Circle sprite (scale 0.2, 0.2, 0.2)
-- ✅ 1000 enemies with flee AI behavior
-- ✅ Collision detection - enemies stop on touch
-- ✅ Screen boundary constraints for all entities
-- ✅ Keyboard controls (WASD/Arrow keys)
-- ✅ ESC key to return to menu
+- ✅ Camera setup with green background at (0, 0, -10)
+- ✅ Player controller with 2D movement system
+- ✅ Enemy AI with flee behavior logic
+- ✅ Screen boundary constraints (optimized calculations)
+- ✅ Keyboard input handling (WASD/Arrow keys)
+- ⚠️ 1000 enemies spawning (may have performance issues)
+- ⚠️ Collision detection (implemented but needs testing)
+- ⚠️ Visual feedback (color changes)
+- ⚠️ ESC key to return to menu (may not work reliably)
+
+### 🐛 Known Issues
+- Game may have bugs in enemy spawning and behavior
+- UI navigation might not work correctly in all cases
+- Performance optimization needed for 1000 enemies
+- Collision detection requires additional testing
+- Module transitions may have edge cases
 
 ### 🎮 Gameplay Features
 
@@ -200,9 +223,11 @@ Assets/
      - EnemyManager → Enemy Prefab
 
 5. **Play the Game**
-   - Open Bootstrap scene: `Assets/Modules/Base/Bootstrap/Scenes/Bootstrap.unity`
-   - Press Play button in Unity Editor
-   - Navigate: Main Menu → Play
+   - Open the main entry scene in Unity Editor
+   - Press Play button
+   - Navigate through menus (if working)
+   
+   > **Note**: Due to incomplete state, some features may not work as expected
 
 ### Controls
 - **Menu Navigation**: Mouse or Arrow Keys + Enter/Space
@@ -327,15 +352,50 @@ private void OnTriggerEnter2D(Collider2D other)
 
 ---
 
+## 🎯 Development Focus & Priorities
+
+### What Was Prioritized
+This project demonstrates a **strong architectural foundation** rather than complete gameplay:
+
+1. **Modular Architecture** (Primary Focus)
+   - Complete module isolation and independence
+   - Clean separation of concerns (MVP pattern)
+   - Scalable structure for future development
+
+2. **Input System** (Primary Focus)
+   - Proper abstraction layer
+   - Support for multiple input methods
+   - Clean integration with game systems
+
+3. **Performance & Optimization** (Primary Focus)
+   - Efficient boundary calculations
+   - Optimized camera-to-world space conversions
+   - Component-based architecture for reusability
+
+4. **Code Quality** (Primary Focus)
+   - Clean code principles
+   - Dependency Injection throughout
+   - Proper use of patterns (Factory, MVP, Component)
+
+### What Was Not Completed
+Due to time constraints, gameplay implementation was not finished:
+- Full UI flow and navigation
+- Complete enemy AI behavior
+- Thorough testing and bug fixes
+- Visual polish and feedback
+- Edge case handling
+
+### Takeaway
+This project showcases **software engineering skills** and **architectural thinking** rather than a polished game. The foundation is solid and extensible, making it easy to complete the gameplay features with additional time.
+
 ## 🤝 About
 
-This project demonstrates:
-- **Clean Architecture**: Modular, testable, maintainable code
-- **Unity Best Practices**: Proper use of Unity patterns and systems
-- **2D Game Development**: Simple but complete 2D gameplay
-- **Professional Workflow**: DI, factories, component-based design
-
-Built as a test assignment showcasing Unity development skills and software architecture knowledge.
+Built as a test assignment to demonstrate:
+- ✅ **Architectural skills**: Clean, modular, scalable structure
+- ✅ **Unity knowledge**: Proper patterns and systems usage
+- ✅ **Code quality**: Professional-level code organization
+- ✅ **Problem-solving**: Input abstraction, optimization, DI integration
+- ⚠️ **Time management**: Prioritized foundation over feature completion
 
 ---
 
