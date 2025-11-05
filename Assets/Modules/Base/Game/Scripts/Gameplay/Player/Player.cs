@@ -47,6 +47,18 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player
 
             if (!SfxManager)
                 SfxManager = GetComponent<PlayerSfx>();
+
+            // Ensure Rigidbody2D simulation is enabled (silent)
+            var rb2D = GetComponent<Rigidbody2D>();
+            if (rb2D != null)
+            {
+                if (!rb2D.simulated)
+                {
+                    rb2D.simulated = true;
+                    rb2D.gravityScale = 0f;
+                    rb2D.bodyType = RigidbodyType2D.Kinematic;
+                }
+            }
         }
 
         private void Update()
@@ -67,13 +79,13 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player
         private void EnterVehicle()
         {
             // Mock vehicle entry - not needed for basic movement
-            Debug.Log("[Mock] Player entered vehicle");
+            
         }
 
         private void ExitVehicle()
         {
             // Mock vehicle exit - not needed for basic movement  
-            Debug.Log("[Mock] Player exited vehicle");
+            
         }
 
         private void OnDestroy()

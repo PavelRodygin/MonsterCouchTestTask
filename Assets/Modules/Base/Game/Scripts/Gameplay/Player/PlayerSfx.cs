@@ -42,11 +42,7 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player
             _moveController = GetComponent<PlayerMoveController>();
             _player = GetComponent<Player>();
             
-            if (_moveController == null)
-                Debug.LogError("PlayerMoveController not found on the same GameObject!");
             
-            if (_player == null)
-                Debug.LogError("Player not found on the same GameObject!");
         }
 
         private void Start()

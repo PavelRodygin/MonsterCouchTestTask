@@ -22,11 +22,7 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player
             _player = GetComponent<Player>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             
-            if (!_moveController) 
-                Debug.LogWarning("PlayerMoveController not found on the same GameObject!");
             
-            if (!_player) 
-                Debug.LogWarning("Player not found on the same GameObject!");
         }
 
         private void Update()

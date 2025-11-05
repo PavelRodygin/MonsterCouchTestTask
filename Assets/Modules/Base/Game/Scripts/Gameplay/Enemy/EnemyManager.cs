@@ -1,16 +1,19 @@
 using System.Collections.Generic;
+using Modules.Base.Game.Scripts.Gameplay.Enemy.Factory;
 using UnityEngine;
+using VContainer;
 
 namespace Modules.Base.Game.Scripts.Gameplay.Enemy
 {
     /// <summary>
-    /// Manages spawning and updating of all enemies
+    /// Manages spawning and updating of all enemies using Factory pattern
     /// </summary>
     public class EnemyManager : MonoBehaviour
     {
         [Header("Enemy Settings")]
-        [SerializeField] private GameObject enemyPrefab;
         [SerializeField] private int enemyCount = 1000;
+        [SerializeField] private int maxEnemiesUpdatedPerFrame = 250;
+        [SerializeField] private float colliderActivationRadius = 1.2f; // enable triggers near player
         
         [Header("Spawn Settings")]
         [SerializeField] private float spawnRadius = 10f;
@@ -19,8 +22,17 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         private readonly List<Enemy> _activeEnemies = new();
         private Transform _playerTransform;
         private Transform _spawnParent;
+        private IEnemyFactory _enemyFactory;
         private Camera _mainCamera;
         private Vector2 _screenBounds;
+        private int _updateCursor;
+
+        [Inject]
+        public void Construct(IEnemyFactory enemyFactory, Camera mainCamera)
+        {
+            _enemyFactory = enemyFactory;
+            _mainCamera = mainCamera;
+        }
 
         public IReadOnlyList<Enemy> ActiveEnemies => _activeEnemies;
 
@@ -42,27 +54,20 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
             }
             
             CalculateScreenBounds();
-            
-            Debug.Log($"EnemyManager initialized with screen bounds: {_screenBounds}, player at: {_playerTransform.position}, spawn parent: {(_spawnParent != null ? _spawnParent.name : "null")}");
-            
             SpawnEnemies();
         }
 
         private void SpawnEnemies()
         {
-            if (enemyPrefab == null)
+            if (_enemyFactory == null)
             {
-                Debug.LogError("Enemy prefab is not assigned in EnemyManager!");
                 return;
             }
 
             if (_playerTransform == null)
             {
-                Debug.LogError("Player transform is null! Cannot spawn enemies.");
                 return;
             }
-
-            Vector3 center = spawnCenter != null ? spawnCenter.position : Vector3.zero;
 
             for (int i = 0; i < enemyCount; i++)
             {
@@ -70,19 +75,19 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
                 // Set Z to 0.1 to be slightly in front of background but behind UI
                 Vector3 spawnPosition = new Vector3(randomPosition2D.x, randomPosition2D.y, 0.1f);
                 
-                // Spawn enemies in the same parent as player (GameWorld)
-                GameObject enemyObj = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, _spawnParent);
+                // Create enemy using factory (with DI)
+                GameObject enemyObj = _enemyFactory.Create(spawnPosition, _spawnParent);
                 enemyObj.name = $"Enemy_{i}";
 
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
                 if (enemy != null)
                 {
+                    // Ensure enemy is manager-driven for performance
+                    // (Enemy has a managedByManager flag; we drive via Tick regardless)
                     enemy.Initialize(_playerTransform);
                     _activeEnemies.Add(enemy);
                 }
             }
-
-            Debug.Log($"Spawned {_activeEnemies.Count} enemies at Z=0.1 in parent: {(_spawnParent != null ? _spawnParent.name : "null")}");
         }
 
         private Vector2 GetRandomPositionInScreen()
@@ -118,7 +123,42 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
                 }
             }
             _activeEnemies.Clear();
-            Debug.Log("All enemies cleared");
+            // Enemies cleared
+        }
+
+        private void Update()
+        {
+            if (_playerTransform == null || _activeEnemies.Count == 0)
+                return;
+
+            // Tick a subset each frame to reduce CPU spikes
+            int count = _activeEnemies.Count;
+            int toUpdate = Mathf.Min(maxEnemiesUpdatedPerFrame, count);
+            Vector2 playerPos = _playerTransform.position;
+            float dt = Time.deltaTime;
+
+            for (int i = 0; i < toUpdate; i++)
+            {
+                int index = (_updateCursor + i) % count;
+                Enemy enemy = _activeEnemies[index];
+                if (enemy != null)
+                {
+                    enemy.Tick(playerPos, dt, _screenBounds);
+                }
+            }
+
+            _updateCursor = (_updateCursor + toUpdate) % count;
+
+            // Manage trigger activation for collisions near player
+            float activationRadiusSqr = colliderActivationRadius * colliderActivationRadius;
+            for (int i = 0; i < count; i++)
+            {
+                Enemy enemy = _activeEnemies[i];
+                if (enemy == null) continue;
+                Vector2 pos = enemy.transform.position;
+                bool shouldEnable = (pos - playerPos).sqrMagnitude <= activationRadiusSqr;
+                enemy.SetTriggerActive(shouldEnable);
+            }
         }
 
         private void OnDestroy()

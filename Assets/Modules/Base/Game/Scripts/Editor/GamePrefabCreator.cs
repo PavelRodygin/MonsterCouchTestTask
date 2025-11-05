@@ -73,11 +73,13 @@ namespace Modules.Base.Game.Scripts.Editor
             // Add 2D collider
             CircleCollider2D collider = player.AddComponent<CircleCollider2D>();
             collider.radius = 0.5f;
+            collider.isTrigger = false; // Player is NOT a trigger!
             
             // Add rigidbody2D for physics
             Rigidbody2D rb = player.AddComponent<Rigidbody2D>();
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.gravityScale = 0f;
+			rb.simulated = true;
             
             // Add Player component (main controller) and its sub-controllers
             player.AddComponent<Player>();
@@ -124,6 +126,7 @@ namespace Modules.Base.Game.Scripts.Editor
             Rigidbody2D rb = enemy.AddComponent<Rigidbody2D>();
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.gravityScale = 0f;
+			rb.simulated = true;
             
             // Add enemy script
             enemy.AddComponent<Enemy>();

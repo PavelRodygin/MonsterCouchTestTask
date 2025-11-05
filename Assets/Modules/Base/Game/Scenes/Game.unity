@@ -170,6 +170,7 @@ MonoBehaviour:
   gameManager: {fileID: 934518666}
   enemyManager: {fileID: 378391422}
   playerPrefab: {fileID: 7960265524706633065, guid: cb3882c292781dd4db225127d1b093c0, type: 3}
+  enemyPrefab: {fileID: 7071187930767388246, guid: 529edde7580b9b443a645f9fc9a166b5, type: 3}
 --- !u!1 &245920582
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,10 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832db8b48b7206c488fc2ff9274a9137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: GameModule::Modules.Base.Game.Scripts.Gameplay.Enemy.EnemyManager
-  enemyPrefab: {fileID: 7071187930767388246, guid: 529edde7580b9b443a645f9fc9a166b5, type: 3}
   enemyCount: 1000
   spawnRadius: 10
-  spawnCenter: {fileID: 8382148109908350321, guid: 529edde7580b9b443a645f9fc9a166b5, type: 3}
+  spawnCenter: {fileID: 245920583}
 --- !u!1 &470850086
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 1803734353}
   m_Layer: 0
   m_Name: ModuleCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

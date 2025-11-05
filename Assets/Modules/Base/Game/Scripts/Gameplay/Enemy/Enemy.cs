@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Serialization;
+using VContainer;
 
 namespace Modules.Base.Game.Scripts.Gameplay.Enemy
 {
@@ -13,19 +15,49 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         [Header("Screen Bounds")]
         [SerializeField] private bool constrainToScreen = true;
         
+        [Header("Update Mode")]
+        [SerializeField] private bool managedByManager = true;
+        
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Collider2D triggerCollider;
+        
         private Transform _playerTransform;
         private Camera _mainCamera;
         private Vector2 _screenBounds;
-        private bool _isStopped = false;
-        private bool _isInitialized = false;
-        private SpriteRenderer _spriteRenderer;
+        private bool _isStopped;
+        private bool _isInitialized;
 
         public bool IsStopped => _isStopped;
 
+        [Inject]
+        public void Construct(Camera mainCamera)
+        {
+            _mainCamera = mainCamera;
+        }
+
         private void Awake()
         {
-            _mainCamera = Camera.main;
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            // Fallback if DI didn't work
+            if (_mainCamera == null)
+            {
+                _mainCamera = Camera.main;
+            }
+
+            // Cache collider if not set
+            if (triggerCollider == null)
+                triggerCollider = GetComponent<Collider2D>();
+
+            // Ensure Rigidbody2D simulation is enabled (silent)
+            var rb2D = GetComponent<Rigidbody2D>();
+            if (rb2D != null)
+            {
+                if (!rb2D.simulated)
+                {
+                    rb2D.simulated = true;
+                    rb2D.gravityScale = 0f;
+                    rb2D.bodyType = RigidbodyType2D.Kinematic;
+                }
+            }
         }
 
         private void Start()
@@ -38,8 +70,8 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         {
             _playerTransform = playerTransform;
             
-            // Initialize bounds immediately if camera is available
-            if (_mainCamera != null && _screenBounds == Vector2.zero)
+            // Force bounds calculation
+            if (_mainCamera != null)
             {
                 CalculateScreenBounds();
             }
@@ -47,32 +79,40 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
 
         private void Update()
         {
-            // Don't move until fully initialized
-            if (!_isInitialized || _isStopped || _playerTransform == null || _screenBounds == Vector2.zero) 
+            if (managedByManager)
                 return;
 
-            FleeFromPlayer();
+            if (!_isInitialized || _isStopped || _playerTransform == null)
+                return;
+
+            if (_screenBounds == Vector2.zero && _mainCamera != null)
+                CalculateScreenBounds();
+
+            if (_screenBounds == Vector2.zero)
+                return;
+
+            FleeFromPlayerInternal(_playerTransform.position, Time.deltaTime, _screenBounds);
         }
 
-        private void FleeFromPlayer()
+        public void Tick(Vector2 playerPosition, float deltaTime, Vector2 screenBounds)
         {
-            // Always flee from player, no distance check needed
-            Vector2 fleeDirection = ((Vector2)transform.position - (Vector2)_playerTransform.position).normalized;
-            
-            // Check if direction is valid (not at exact same position)
+            if (!_isInitialized || _isStopped)
+                return;
+
+            FleeFromPlayerInternal(playerPosition, deltaTime, screenBounds);
+        }
+
+        private void FleeFromPlayerInternal(Vector2 playerPosition, float deltaTime, Vector2 screenBounds)
+        {
+            Vector2 fleeDirection = ((Vector2)transform.position - playerPosition).normalized;
             if (fleeDirection == Vector2.zero)
-            {
-                // If at same position, flee in random direction
                 fleeDirection = Random.insideUnitCircle.normalized;
-            }
-            
-            Vector3 movement = fleeDirection * fleeSpeed * Time.deltaTime;
+
+            Vector3 movement = (Vector3)(fleeDirection * fleeSpeed * deltaTime);
             Vector3 newPosition = transform.position + movement;
 
             if (constrainToScreen)
-            {
-                newPosition = ClampToScreen(newPosition);
-            }
+                newPosition = ClampToScreen(newPosition, screenBounds);
 
             transform.position = newPosition;
         }
@@ -96,6 +136,14 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
             return new Vector3(clampedX, clampedY, position.z);
         }
 
+        private Vector3 ClampToScreen(Vector3 position, Vector2 screenBounds)
+        {
+            float margin = 0.5f;
+            float clampedX = Mathf.Clamp(position.x, -screenBounds.x + margin, screenBounds.x - margin);
+            float clampedY = Mathf.Clamp(position.y, -screenBounds.y + margin, screenBounds.y - margin);
+            return new Vector3(clampedX, clampedY, position.z);
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
@@ -109,9 +157,9 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
             _isStopped = true;
             
             // Visual feedback - change color when stopped
-            if (_spriteRenderer != null)
+            if (spriteRenderer != null)
             {
-                _spriteRenderer.color = Color.red;
+                spriteRenderer.color = Color.red;
             }
         }
 
@@ -119,9 +167,17 @@ namespace Modules.Base.Game.Scripts.Gameplay.Enemy
         {
             _isStopped = false;
             
-            if (_spriteRenderer != null)
+            if (spriteRenderer != null)
             {
-                _spriteRenderer.color = Color.white;
+                spriteRenderer.color = Color.white;
+            }
+        }
+
+        public void SetTriggerActive(bool active)
+        {
+            if (triggerCollider != null)
+            {
+                triggerCollider.enabled = active;
             }
         }
     }

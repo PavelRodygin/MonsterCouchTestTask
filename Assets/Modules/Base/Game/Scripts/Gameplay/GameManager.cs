@@ -60,7 +60,7 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
                 _enemyManager.Initialize(_activePlayer.transform, spawnParent);
             }
             
-            Debug.Log("2D Game started successfully!");
+            
         }
 
         public void EndGame()
@@ -72,12 +72,11 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
                 _enemyManager.ClearEnemies();
             }
             
-            Debug.Log("Game ended!");
+            
         }
         
         private void ReturnToMenu()
         {
-            Debug.Log("Returning to menu...");
             OnReturnToMenu?.Invoke();
         }
 
@@ -88,7 +87,6 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         {
             if (_playerFactory == null)
             {
-                Debug.LogError("PlayerFactory is not injected!");
                 return;
             }
 
@@ -107,7 +105,7 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
                     playerComponent.SetGameWorldTransform(gameWorldTransform);
                 }
                 
-                Debug.Log($"2D Player spawned successfully in parent: {parentTransform.name}");
+                
             }
         }
 
@@ -120,7 +118,7 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
             {
                 Destroy(_activePlayer);
                 _activePlayer = null;
-                Debug.Log("Player destroyed");
+                // Player destroyed
             }
         }
 
@@ -128,13 +126,11 @@ namespace Modules.Base.GameModule.Scripts.Gameplay.Systems
         {
             if (_playerFactory == null)
             {
-                Debug.LogError("PlayerFactory is not injected in GameManager!");
                 return false;
             }
 
             if (_enemyManager == null)
             {
-                Debug.LogError("EnemyManager is not injected in GameManager!");
                 return false;
             }
 

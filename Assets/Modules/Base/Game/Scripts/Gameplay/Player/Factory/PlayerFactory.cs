@@ -28,8 +28,6 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player.Factory
         /// </summary>
         public GameObject Create(Vector3 position, Quaternion rotation, Transform parent)
         {
-            Debug.Log($"PlayerFactory.Create called at {position}, parent: {(parent != null ? parent.name : "null")}");
-            
             // Use VContainer's Instantiate method which automatically injects dependencies
             var playerInstance = _resolver.Instantiate(_playerPrefab, position, rotation, parent);
             
@@ -38,11 +36,6 @@ namespace Modules.Base.Game.Scripts.Gameplay.Player.Factory
             if (player)
             {
                 player.Initialize(false); // Not in vehicle by default
-                Debug.Log($"Player created at {position} with VContainer dependencies injected: {playerInstance.name}");
-            }
-            else
-            {
-                Debug.LogError("Player component not found on instantiated prefab!");
             }
             
             return playerInstance;

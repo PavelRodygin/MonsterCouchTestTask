@@ -36,7 +36,7 @@ namespace Modules.Base.Game.Scripts.Gameplay
                 _camera.orthographicSize = orthographicSize;
             }
 
-            Debug.Log($"Camera setup complete: Position {cameraPosition}, Background {backgroundColor}");
+            
         }
 
         #if UNITY_EDITOR

@@ -2,6 +2,7 @@ using CodeBase.Services.SceneInstallerService;
 using Modules.Base.GameModule.Scripts.Gameplay.Systems;
 using Modules.Base.Game.Scripts.Gameplay.Player.Factory;
 using Modules.Base.Game.Scripts.Gameplay.Enemy;
+using Modules.Base.Game.Scripts.Gameplay.Enemy.Factory;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,6 +15,7 @@ namespace Modules.Base.Game.Scripts
         [SerializeField] private GameManager gameManager;
         [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private GameObject enemyPrefab;
 
         public override void RegisterSceneDependencies(IContainerBuilder builder)
         {
@@ -36,6 +38,13 @@ namespace Modules.Base.Game.Scripts
             builder
                 .Register<PlayerFactory>(Lifetime.Singleton)
                 .WithParameter("playerPrefab", playerPrefab)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            // Register enemy factory
+            builder
+                .Register<EnemyFactory>(Lifetime.Singleton)
+                .WithParameter("enemyPrefab", enemyPrefab)
                 .AsSelf()
                 .AsImplementedInterfaces();
         }
